@@ -1,0 +1,12 @@
+{
+  "total_records": 240,
+  "number_of_zones": 15,
+  "training_period": "2015-2026 (180 records)",
+  "model_period": "2015-2030 (240 records)",
+  "number_of_features": 8,
+  "missing_value_count": 60,
+  "duplicate_count": 0,
+  "invalid_value_count": 0,
+  "status": "PASS",
+  "data_provenance_notes": "Annual built-up surface between source epochs (2015, 2020, 2025, 2030) are linearly interpolated estimates."
+}
