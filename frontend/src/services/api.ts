@@ -78,6 +78,63 @@ export interface DashboardSummary {
   capacityNotice: string;
 }
 
+export interface ResearchZoneOption {
+  zoneId: number;
+  zoneCode: string;
+  zoneName: string;
+}
+
+export interface ZoneTimelinePoint {
+  year: number;
+  population: number;
+  builtUpSurfaceM2: number;
+  builtUpKm2: number;
+  nightLight: number;
+  builtUpSource: string;
+  isTrainingPeriod: boolean;
+  waterDemandMLD: number;
+  energyDemandMWh: number;
+  hospitalBeds: number;
+  schoolSeats: number;
+}
+
+export interface PriorityInfo {
+  priorityScore: number;
+  priorityLevel: string;
+  growthFactor: number;
+  densityFactor: number;
+  demandFactor: number;
+  growthContribution?: number;
+  densityContribution?: number;
+  demandContribution?: number;
+}
+
+export interface FeatureImportancePoint {
+  feature: string;
+  importance: number;
+  category?: string;
+}
+
+export interface ModelComparisonPoint {
+  metric: string;
+  baseline: number;
+  lstm: number;
+  hybrid: number;
+  description?: string;
+}
+
+export interface ResearchPaperData {
+  zoneInfo: ResearchZoneOption;
+  availableZones: ResearchZoneOption[];
+  timeline: ZoneTimelinePoint[];
+  priorityInfo: PriorityInfo;
+  featureImportance: FeatureImportancePoint[];
+  modelComparison: ModelComparisonPoint[];
+  paperHeader: string;
+  journalLogo: string;
+  dataSource: string;
+}
+
 export const api = {
   // Data APIs
   getDataSummary: () => axios.get<DataSummary>(`${API_BASE}/data/summary`).then(res => res.data),
@@ -103,5 +160,9 @@ export const api = {
   
   // Dashboard API
   getDashboardSummary: (year: number = 2030) => 
-    axios.get<DashboardSummary>(`${API_BASE}/dashboard/summary`, { params: { forecastYear: year } }).then(res => res.data)
+    axios.get<DashboardSummary>(`${API_BASE}/dashboard/summary`, { params: { forecastYear: year } }).then(res => res.data),
+
+  // Research Paper API
+  getResearchPaperResults: (zoneId: number = 0) => 
+    axios.get<ResearchPaperData>(`${API_BASE}/research/paper-results`, { params: { zoneId } }).then(res => res.data)
 };
